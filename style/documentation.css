@@ -1,0 +1,53 @@
+/* 
+    Created on : Nov 27, 2013, 22:25:59 AM
+    Author     : Matus Macak | justM
+    Content    : Describes stylesheet`s IDs and used classes
+*/
+
+/*********** IDs *************/
+/*  
+    #content - Container for dynamically generated content from particular views
+    #hrzNav - Main horizontal navigation bar
+   
+    #mContainer - Main container with generated content
+    #mHeader - Main header with logo and horizontal navigation
+    #mLogo - Main logo in header
+    #mStripe - Just a thin line above a whole page
+
+    #vertNav - Main vertical navigation bar
+    #vertNav-placeholder - Placeholder for a main vertical navigation due to absolute positiong of navigation element
+*/
+
+/*********** CLASSes *************/
+/*  
+
+    .clear - Empty element which prevents collapsing parent element if it contains only float elements
+    .container - Sets main width of a web page
+    .img-submit - Submit button with image background
+    .left - Custom elements which floats left
+    
+    .nAnim -Exempt element from default settings and do not use transition (animations)
+    .nFloated - Exempt element from default settings and use float:none
+    .right - Custom elements which floats right 
+    .rightOvf - Custom elements which fill a space between right border and left-floating element
+
+    .small-button - Same as input[type=submit] or .style-button but a bit smaller
+    .styled-button - Anchor styled as button
+*/
+
+/* PREDEFINED COLOR PALLETES */
+/*
+
+    #muddy-blue: #525262 rgba(82, 82, 98, 1);
+    #grayish-blue: #d2d9e4 rgba(210, 217, 228, 1);
+    #water-blue: #f2f4f7 rgba(242, 244, 247, 1);
+
+    #bloody-red: #b81c18 rgba(184, 28, 24, 1); 
+    #bright-red: #e53c38 rgba(229, 60, 56, 1); 
+    
+    #confirmation-ligth-green #65b465 rgba(101,180,101,1)
+    #confirmation-dark-green #438943 rgba(67,137,67,1)
+
+    border in forms #b2bed1
+
+*/

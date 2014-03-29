@@ -1,0 +1,26 @@
+/* 
+    Created on : Dec 02, 2013, 15:25:59
+    Author     : Matus Macak | justM
+    Content    : Footer section style
+*/
+
+footer{
+    position: absolute;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    min-width: 1150px;
+    background: #525262;
+    color: #fff;
+    border-top: 1px solid #525262;
+    box-shadow: inset 0 11px 3px -10px rgba(255,255,255,.8);
+}
+footer ul {
+    list-style-type: none;
+    width: 200px;
+    margin-top: 40px
+}
+footer ul li a{
+    display: block;
+    margin: 10px 0;
+}
