@@ -10,7 +10,7 @@
                     </tr>
                     <tr>
                         <th>Pohlavie</th>
-                        <td><?php echo ($dog->dog__gender == 'F')? 'suka' : 'pes' ?></td>
+                        <td><?php echo $dog->dog__gender; ?></td>
                     </tr>
                     <tr>
                         <th>Narodenie</th>
