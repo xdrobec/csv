@@ -25,7 +25,7 @@
                 <div class="container">
                     <ul>
                         <li>
-                            <?php echo anchor('user/login', "Prihlásenie"); ?>
+                            <?php echo anchor('user/login_form', "Prihlásenie"); ?>
                         </li>
                         <li>
                             <?php echo anchor('user/register', "Registrovať sa"); ?>

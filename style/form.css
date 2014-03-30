@@ -131,6 +131,12 @@ form .requiredField:after{
     color: #b81c18;
     font-weight: bold
 }
+div.centerOuter{
+    margin-left: 50%;
+}
+div.centerInner{
+    margin-right: -50%;
+}
 
 /* CAPTCHA Module*/
 .captcha-row {
