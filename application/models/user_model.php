@@ -90,16 +90,58 @@ class User_model extends CI_Model {
                     'username' => $rows->user__username,
                     'password' => $rows->user__passwordhash,
                     'webaddress' => $rows->user__webaddress,
+                    'address' => $this->get_userAddress($rows->user__id),
                     'phone' => $rows->user__phone,
                     'active' => $rows->user__isactive,
-                    'role' => $rows->user__id_role,
+                    'role' => $this->get_userRole($rows->user__id_role),
                 );
             }
 
-            return $newdata;
+            return (object) $newdata;
         }
         return false;
     }
+    
+    public function get_userAddress($user_id){
+        
+        $this->db->where("user_address__id_user", $user_id);
+        $query = $this->db->get("user_address");
+        
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $rows) {
+                $newdata = array(
+                    'street' => $rows->user_address__street,
+                    'housenumber' => $rows->user_address__housenumber,
+                    'city' => $rows->user_address__city,
+                    'postcode' => $rows->user_address__postcode,
+                    'id_user' => $rows->user_address__id_user,
+                    'id_country' => $rows->user_address__id_country,
+                );
+            }
+
+            return (object) $newdata;
+        }
+        return false;
+    }
+    
+    public function get_userRole($role_id){
+        
+        $this->db->where("role__id", $role_id);
+        $query = $this->db->get("role");
+        
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $rows) {
+                $newdata = array(
+                    'name' => $rows->role__name,
+                    'realname' => $rows->role__realname,
+                );
+            }
+
+            return (object) $newdata;
+        }
+        return false;
+    }
+
 
     public function find_user($login) {
         $this->db->where("login", $login); //
