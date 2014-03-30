@@ -33,46 +33,7 @@ class User_model extends CI_Model {
         return false;
     }
 
-    public function create_logs($id) {
-        //vytvorenie logov
-        $ipecka = $this->input->ip_address();
-        if (strlen($ipecka) < 6)
-            $ipecka = "147.175.106.44";
-        $this->load->helper('geo_location');
-        $geo_data = get_geolocation($ipecka);
-
-
-        $insertLog = array(
-            'id_user' => $id,
-            'ip_address' => $ipecka,
-            'state' => $geo_data['country_name'],
-        );
-        $this->db->insert("logs", $insertLog);
-    }
-
-    public function get_user_logs($id) {
-        //vytvorenie logov
-        $query = $this->db->query("SELECT * FROM logs WHERE id_user=" . $id . " ORDER by id_log DESC");
-        return $query->result();
-    }
-
-    public function add_user() {
-        $pass = substr(md5(time()), 1, 7);
-        $data = array(
-            'login' => $this->input->post('login'),
-            'name' => $this->input->post('user_name'),
-            'surname' => $this->input->post('user_surname'),
-            //'password' => $this->input->post('password'),
-            'email' => $this->input->post('email_address'),
-            'type' => $this->input->post('typ'),
-            'role' => $this->input->post('rola'),
-            'news_lang' => $this->input->post('news_lang'),
-            'state' => $this->input->post('state'),
-            'password' => md5($pass)
-        );
-        $this->db->insert('users', $data);
-        return $pass;
-    }
+    
 
     public function get_user($user_id) {
         
@@ -115,7 +76,7 @@ class User_model extends CI_Model {
                     'city' => $rows->user_address__city,
                     'postcode' => $rows->user_address__postcode,
                     'id_user' => $rows->user_address__id_user,
-                    'id_country' => $rows->user_address__id_country,
+                    'country' => $this->get_country($rows->user_address__id_country),
                 );
             }
 
@@ -137,6 +98,21 @@ class User_model extends CI_Model {
                 );
             }
 
+            return (object) $newdata;
+        }
+        return false;
+    }
+    
+    public function get_country($country_id){
+        $this->db->where("country__id", $country_id);
+        $query = $this->db->get("country");
+        
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $rows) {
+                $newdata = array(
+                    'country_name' => $rows->country__name,
+                );
+            }
             return (object) $newdata;
         }
         return false;
@@ -230,6 +206,47 @@ class User_model extends CI_Model {
         $this->db->order_by("count", "DESC");
         $query = $this->db->get();
         return $query->result();
+    }
+    
+    public function create_logs($id) {
+        //vytvorenie logov
+        $ipecka = $this->input->ip_address();
+        if (strlen($ipecka) < 6)
+            $ipecka = "147.175.106.44";
+        $this->load->helper('geo_location');
+        $geo_data = get_geolocation($ipecka);
+
+
+        $insertLog = array(
+            'id_user' => $id,
+            'ip_address' => $ipecka,
+            'state' => $geo_data['country_name'],
+        );
+        $this->db->insert("logs", $insertLog);
+    }
+
+    public function get_user_logs($id) {
+        //vytvorenie logov
+        $query = $this->db->query("SELECT * FROM logs WHERE id_user=" . $id . " ORDER by id_log DESC");
+        return $query->result();
+    }
+
+    public function add_user() {
+        $pass = substr(md5(time()), 1, 7);
+        $data = array(
+            'login' => $this->input->post('login'),
+            'name' => $this->input->post('user_name'),
+            'surname' => $this->input->post('user_surname'),
+            //'password' => $this->input->post('password'),
+            'email' => $this->input->post('email_address'),
+            'type' => $this->input->post('typ'),
+            'role' => $this->input->post('rola'),
+            'news_lang' => $this->input->post('news_lang'),
+            'state' => $this->input->post('state'),
+            'password' => md5($pass)
+        );
+        $this->db->insert('users', $data);
+        return $pass;
     }
 
 }

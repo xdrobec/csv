@@ -28,9 +28,15 @@ class Dog extends CI_Controller {
     
     public function index() {
         
+        if (($dogs = $this->dog->getAllDogs()) == NULL)
+            show_error("Žiadne psy", 404, "Žiadne psy neexistujú");
+        
+        $data['dogs'] = $dogs;
+        $this->load->view('dog/alldogs', $data);
+        $this->load->view('footer');
     }
     
-    public function show($id, $name){
+    public function show($id){
         $id = (int) $id;
         if ($id < 1)
             show_error("Neexistujúci pes", 404, "Tento pes neexistuje");

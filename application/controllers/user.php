@@ -77,8 +77,6 @@ class User extends CI_Controller {
 
         $data['user_data'] = $profil;
         $this->load->view("user/my_profil", $data);
-        
-
         $this->load->view('footer', $data);
     }
 
